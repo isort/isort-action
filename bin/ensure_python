@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# If Python 3 isn't installed, exit
+python3 -V > /dev/null 2>&1 || (echo "python3 is not available. Use the setup-python action" && exit 1)
+
+# Make sure we're using a supported version of Python
+major_version=$(python3 -c 'import sys; print(sys.version_info[0])')
+minor_version=$(python3 -c 'import sys; print(sys.version_info[1])')
+if [ $major_version -lt 3 ] || [ $minor_version -lt 6 ]; then
+    echo "Minimum supported version of python is 3.6, but $(python3 -V) is installed"
+    exit 1
+fi
