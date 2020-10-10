@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  lint:
+    build:
+      dockerfile: .github/linting/Dockerfile
+      context: .
+    volumes:
+      - .github/linting/lint.sh:/usr/local/bin/lint
+      - .github/linting/.yamllint:/.yamllint
+      - ./:/workdir

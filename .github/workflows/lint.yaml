@@ -1,0 +1,12 @@
+name: Linting
+on:
+  - push
+  - pull_request
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run lints
+        run: docker-compose run --rm lint --check-only
