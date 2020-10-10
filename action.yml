@@ -1,40 +1,46 @@
-name: "python-isort"
-author: "jamescurtin"
-description: "Run isort on a Python project"
+name: python-isort
+author: jamescurtin
+description: Run isort on a Python project
 branding:
-    icon: "check"
-    color: "blue"
+  icon: check
+  color: blue
 
 inputs:
   isortVersion:
-    description: "Version of isort to use"
+    description: Version of isort to use
     required: false
     default: ""
   sortPaths:
-    description: "files or directories to sort"
+    description: files or directories to sort
     required: false
-    default: "."
+    default: .
   configuration:
-    description: "isort configuration options"
+    description: isort configuration options
     required: false
-    default: "--check-only --diff"
+    default: --check-only --diff
   requirementsFiles:
-    description: "path(s) to requirements files that should be installed to properly configure third-party imports"
+    description:
+      path(s) to requirements files that should be installed to properly
+      configure third-party imports
     required: false
     default: ""
 
 outputs:
   isort-result:
-    description: "isort result"
+    description: isort result
     value: ${{ steps.run-isort.outputs.isort-output }}
 
 runs:
-  using: "composite"
+  using: composite
   steps:
     - run: ${{ github.action_path }}/bin/ensure_python
       shell: bash
-    - run: ${{ github.action_path }}/bin/install_packages "${{ inputs.isortVersion }}" "${{ inputs.requirementsFiles }}"
+    - run:
+        ${{ github.action_path }}/bin/install_packages ${{ inputs.isortVersion
+        }} ${{ inputs.requirementsFiles }}
       shell: bash
     - id: run-isort
-      run: ${{ github.action_path }}/bin/run_isort "${{ inputs.configuration }}" "${{ inputs.sortPaths }}"
+      run:
+        ${{ github.action_path }}/bin/run_isort ${{ inputs.configuration }} ${{
+        inputs.sortPaths }}
       shell: bash
