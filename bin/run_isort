@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-configuration=$1
-sort_paths=$2
-
-echo "Running isort $configuration $sort_paths"
-isort_result=$(isort "$configuration" "$sort_paths")
+echo "Running isort $*"
+isort_result=$(isort "$@")
 exit_code=$?
 
 echo "::set-output name=isort-output::${isort_result}"
