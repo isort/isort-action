@@ -1,4 +1,4 @@
-FROM mvdan/shfmt:v3.2.1 as shfmt
+FROM mvdan/shfmt:v3.2.2 as shfmt
 FROM koalaman/shellcheck:v0.7.1 as shellcheck
 
 FROM python:3.9.1-alpine3.12
