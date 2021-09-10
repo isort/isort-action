@@ -14,9 +14,9 @@ fi
 echo "::endgroup::"
 
 if [ -n "$requirements_files" ]; then
-  echo "::group::Install modules from requirements arg"
-  for file in $requirements_files; do
-      pip install -r "$file"
-  done
-  echo "::endgroup::"
+    echo "::group::Install modules from requirements arg"
+    for file in $requirements_files; do
+        pip install -r "$file"
+    done
+    echo "::endgroup::"
 fi
