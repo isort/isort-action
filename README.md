@@ -16,7 +16,7 @@ Optional. List of paths to sort, relative to your project root. Defaults to `.`
 
 ### `configuration`
 
-Optional. `isort` configuration options to pass to the `isort` CLI. Defaults to `-check-only --diff`.
+Optional. `isort` configuration options to pass to the `isort` CLI. Defaults to `--check-only --diff`.
 
 ### `requirementsFiles`
 
