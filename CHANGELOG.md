@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contributing guide
 - Continuous Integration test suite
 
+### Changed
+
+- Default to using the latest version of `isort`, if the `isortVersion` input is not specified
+
 ### Fixed
 
 - Configuration parameter parsing in run_isort
