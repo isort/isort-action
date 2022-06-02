@@ -9,7 +9,7 @@ inputs:
   isortVersion:
     description: Version of isort to use
     required: false
-    default: ""
+    default: latest
   sortPaths:
     description: files or directories to sort
     required: false

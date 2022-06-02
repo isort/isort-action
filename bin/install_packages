@@ -4,7 +4,7 @@ isort_version=$1
 requirements_files=$2
 
 echo "::group::Install isort"
-if [ -z "$isort_version" ]; then
+if [ -z "$isort_version" ] || [ "$isort_version" == "latest" ]; then
     echo "Installing latest version of isort"
     pip3 install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]"
 else
