@@ -16,10 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Default to using the latest version of `isort`, if the `isortVersion` input is not specified
+- Include pip install output in the log outputs instead of suppressing it.
 
 ### Fixed
 
 - Configuration parameter parsing in run_isort
+- Only attempt to pip install from a requirements file if listed in the configuration
 
 ## [0.1.0] - 2020-10-04
 
