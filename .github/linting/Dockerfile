@@ -1,7 +1,7 @@
 FROM mvdan/shfmt:v3.5.1 as shfmt
 FROM koalaman/shellcheck:v0.8.0 as shellcheck
 
-FROM python:3.9.5-alpine3.12
+FROM python:3.10.4-alpine3.16
 
 RUN apk add --no-cache bash
 
