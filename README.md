@@ -41,7 +41,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: isort/isort-action@master
         with:
             requirementsFiles: "requirements.txt requirements-test.txt"
