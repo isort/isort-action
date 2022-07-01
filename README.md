@@ -2,7 +2,7 @@
 
 This action runs isort on a Python repository.
 
-It requires that the [`checkout`][github-checkout] and [`setup-python`][github-setup-python] actions be used first.
+It requires that the [`checkout`][github-checkout] action be used first.
 
 ## Inputs
 
@@ -42,9 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
       - uses: isort/isort-action@master
         with:
             requirementsFiles: "requirements.txt requirements-test.txt"
@@ -61,4 +58,3 @@ or add the `--check-only` flag to exit without formatting code.
 
 [contributors-guide]: CONTRIBUTING.md
 [github-checkout]: https://github.com/actions/checkout
-[github-setup-python]: https://github.com/actions/setup-python
