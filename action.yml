@@ -28,7 +28,7 @@ inputs:
 outputs:
   isort-result:
     description: isort result
-    value: ${{ steps.run-isort.outputs.isort-output }}
+    value: ${{ env.isort-output }}
 
 runs:
   using: composite
