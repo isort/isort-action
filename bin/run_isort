@@ -4,5 +4,5 @@ echo "Running isort $*"
 isort_result=$(isort "$@")
 exit_code=$?
 
-echo "::set-output name=isort-output::${isort_result}"
+echo "isort-output=${isort_result}" >> "${GITHUB_OUTPUT}"
 exit $exit_code
