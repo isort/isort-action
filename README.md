@@ -6,11 +6,11 @@ It requires that the [`checkout`][github-checkout] action be used first.
 
 ## Inputs
 
-### `isortVersion`
+### `isort-version`
 
 Optional. Version of `isort` to use. Defaults to latest version of `isort`.
 
-### `sortPaths`
+### `sort-paths`
 
 Optional. List of paths to sort, relative to your project root. Defaults to `.`
 
@@ -18,7 +18,7 @@ Optional. List of paths to sort, relative to your project root. Defaults to `.`
 
 Optional. `isort` configuration options to pass to the `isort` CLI. Defaults to `--check-only --diff`.
 
-### `requirementsFiles`
+### `requirements-files`
 
 Optional. Paths to python requirements files to install before running isort.
 If multiple requirements files are provided, they should be separated by a space.
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: isort/isort-action@v1.0.0
         with:
-            requirementsFiles: "requirements.txt requirements-test.txt"
+            requirements-files: "requirements.txt requirements-test.txt"
 ```
 
 ## Developing
