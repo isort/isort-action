@@ -1,0 +1,32 @@
+name: Run isort
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: imports-properly-sorted
+        uses: ./
+        with:
+          sortPaths: test/good.py
+      - name: assert-sorted-imports-return-no-output
+        run: |
+          output="${{steps.imports-properly-sorted.outputs.isort-result}}"
+          if ! [[ $output == "" ]]; then
+            exit 1
+          fi
+      - id: imports-improperly-sorted
+        uses: ./
+        with:
+          sortPaths: test/bad.py
+          configuration: --diff
+      - name: assert-improperly-sorted-imports-return-output
+        run: |
+          output="${{steps.imports-improperly-sorted.outputs.isort-result}}"
+          expected_substring="+import datetime"
+          if ! [[ $output == *"${expected_substring}"* ]]; then
+            exit 1
+          fi

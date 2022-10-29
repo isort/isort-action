@@ -4,5 +4,15 @@ echo "Running isort $*"
 isort_result=$(isort "$@")
 exit_code=$?
 
-echo "isort-output=${isort_result}" >> "${GITHUB_OUTPUT}"
+# The isort output can be a multiline string. By default, GITHUB_OUTPUT expects
+# output to be on a single line, so a (random) delimiter needs to be used
+# so that the output is parsed properly.
+# See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+DELIMITER=$(echo $RANDOM | md5sum | head -c 20)
+{
+    echo "isort-output<<${DELIMITER}"
+    echo "${isort_result}"
+    echo "${DELIMITER}"
+} >> "${GITHUB_OUTPUT}"
+
 exit $exit_code
