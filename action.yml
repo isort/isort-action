@@ -6,22 +6,59 @@ branding:
   color: blue
 
 inputs:
-  isortVersion:
+  isort-version:
     description: Version of isort to use
     required: false
+    # Use default null to fallback to isortVersion with the expression:
+    #
+    #    ${{ inputs.isort-version || inputs.isortVersion }}
+    #
+    # TODO: Change to latest when dropping support for isortVersion.
+    default: null
+
+  isortVersion:
+    description: >
+      Version of isort to use (DEPRECATED: use isort-version instead)
+    required: false
     default: latest
-  sortPaths:
+
+  sort-paths:
     description: files or directories to sort
     required: false
+    # Use default null to fallback to sortPaths with the expression:
+    #
+    #     ${{ inputs.sort-paths || inputs.sortPaths }}
+    #
+    # TODO: Change to . when dropping support for sortPaths.
+    default: null
+
+  sortPaths:
+    description: >
+      files or directories to sort (DEPRECATED: use sort-paths instead)
+    required: false
     default: .
+
   configuration:
     description: isort configuration options
     required: false
     default: --check-only --diff
-  requirementsFiles:
-    description:
+
+  requirements-files:
+    description: >
       path(s) to requirements files that should be installed to properly
       configure third-party imports
+    required: false
+    # Use default null to fallback to requirementsFiles with the expression:
+    #
+    #     ${{ inputs.requirements-files || inputs.requirementsFiles }}
+    #
+    # TODO: Change to "" when dropping support for requirementsFiles.
+    default: null
+
+  requirementsFiles:
+    description: >
+      path(s) to requirements files that should be installed to properly
+      configure third-party imports (DEPRECATED: use requirement-files instead)
     required: false
     default: ""
 
@@ -35,12 +72,12 @@ runs:
   steps:
     - run: ${{ github.action_path }}/bin/ensure_python
       shell: bash
-    - run:
-        ${{ github.action_path }}/bin/install_packages ${{ inputs.isortVersion
-        }} ${{ inputs.requirementsFiles }}
+    - run: >
+        ${{ github.action_path }}/bin/install_packages
+        ${{ inputs.isort-version || inputs.isortVersion }}
+        ${{ inputs.requirements-files || inputs.requirementsFiles }}
       shell: bash
     - id: run-isort
       run:
-        ${{ github.action_path }}/bin/run_isort ${{ inputs.configuration }} ${{
-        inputs.sortPaths }}
+        ${{ github.action_path }}/bin/run_isort ${{ inputs.configuration }} ${{ inputs.sort-paths || inputs.sortPaths }}
       shell: bash
