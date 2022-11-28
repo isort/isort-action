@@ -1,4 +1,5 @@
 # These imports are improperly sorted and should fail isort
+import sys
 import time
 from dataclasses import dataclass, field
 import datetime
