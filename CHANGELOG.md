@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A [problem matcher](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md) so you can see issues without trawling through logs
+
 ## [1.1.0] - 2022-11-04
 
 - All inputs changed to use kebab-case: `isort-version`, `sort-paths`, and
