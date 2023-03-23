@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: isort/isort-action@v1.0.0
+      - uses: isort/isort-action@v1
         with:
             requirements-files: "requirements.txt requirements-test.txt"
 ```
