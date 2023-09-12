@@ -70,18 +70,20 @@ outputs:
 runs:
   using: composite
   steps:
-    - run: ${{ github.action_path }}/bin/ensure_python
+    - run: $GITHUB_ACTION_PATH/bin/ensure_python
       shell: bash
     - run: >
-        ${{ github.action_path }}/bin/install_packages
+        $GITHUB_ACTION_PATH/bin/install_packages
         ${{ inputs.isort-version || inputs.isortVersion }}
         ${{ inputs.requirements-files || inputs.requirementsFiles }}
       shell: bash
-    - run: echo "::add-matcher::${{ github.action_path }}/isort-matcher.json"
+    - run: echo "::add-matcher::$GITHUB_ACTION_PATH/isort-matcher.json"
       shell: bash
     - id: run-isort
-      run:
-        ${{ github.action_path }}/bin/run_isort ${{ inputs.configuration }} ${{ inputs.sort-paths || inputs.sortPaths }}
+      run: >
+        $GITHUB_ACTION_PATH/bin/run_isort
+        ${{ inputs.configuration }}
+        ${{ inputs.sort-paths || inputs.sortPaths }}
       shell: bash
     - run: echo "::remove-matcher owner=isort-matcher::"
       shell: bash
