@@ -6,17 +6,17 @@ requirements_files=$2
 echo "::group::Install isort"
 if [ -z "$isort_version" ] || [ "$isort_version" == "latest" ]; then
     echo "Installing latest version of isort"
-    pip3 install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]"
+    python3 -m pip install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]"
 else
     echo "Installing isort==$isort_version"
-    pip3 install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]==$isort_version"
+    python3 -m pip install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]==$isort_version"
 fi
 echo "::endgroup::"
 
 if [ -n "$requirements_files" ]; then
     echo "::group::Install modules from requirements arg"
     for file in $requirements_files; do
-        pip install -r "$file"
+        python3 -m pip install -r "$file"
     done
     echo "::endgroup::"
 fi
