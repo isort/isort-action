@@ -52,8 +52,8 @@ jobs:
 Before starting on a new feature, please review the [contributing guide][contributors-guide].
 
 All PRs must pass the CI pipeline to be merged.
-To validate your code, you may run the test suite locally using `docker-compose`.
-The full test suite can be run via `docker-compose run --rm lint`, which will auto-format the code
+To validate your code, you may run the test suite locally using `docker compose`.
+The full test suite can be run via `docker compose run --rm lint`, which will auto-format the code
 or add the `--check-only` flag to exit without formatting code.
 
 [contributors-guide]: CONTRIBUTING.md
