@@ -4,6 +4,10 @@ isort_version=$1
 requirements_files=$2
 
 echo "::group::Install isort"
+
+# shellcheck source=/dev/null
+source "${HOME}/isort-venv/bin/activate"
+
 if [ -z "$isort_version" ] || [ "$isort_version" == "latest" ]; then
     echo "Installing latest version of isort"
     python3 -m pip install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]"

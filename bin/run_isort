@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# shellcheck source=/dev/null
+source "${HOME}/isort-venv/bin/activate"
+
 echo "Running isort $*"
 isort_result=$(isort "$@")
 exit_code=$?
