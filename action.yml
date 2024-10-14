@@ -73,6 +73,9 @@ runs:
     - run: $GITHUB_ACTION_PATH/bin/ensure_python
       shell: bash
     - run: >
+        python -m venv "${HOME}/isort-venv"
+      shell: bash
+    - run: >
         $GITHUB_ACTION_PATH/bin/install_packages
         ${{ inputs.isort-version || inputs.isortVersion }}
         ${{ inputs.requirements-files || inputs.requirementsFiles }}
