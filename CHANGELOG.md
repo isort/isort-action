@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Packages are installed into a virtualenv due to the fact that system-wide
   installs fail by default when run on newer versions of Python.
+- Print stderr to console when action fails.
 
 ## [1.1.0] - 2022-11-04
 

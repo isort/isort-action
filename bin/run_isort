@@ -4,7 +4,7 @@
 source "${HOME}/isort-venv/bin/activate"
 
 echo "Running isort $*"
-isort_result=$(isort "$@")
+isort_result=$(isort "$@" 2>&1)
 exit_code=$?
 
 # The isort output can be a multiline string. By default, GITHUB_OUTPUT expects
@@ -31,4 +31,5 @@ DELIMITER=$(
     echo "${DELIMITER}"
 } >> "${GITHUB_OUTPUT}"
 
+echo "${isort_result}"
 exit $exit_code
