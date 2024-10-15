@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2024-10-14
+
 ### Added
 
 - A [problem matcher](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md) so you can see issues without trawling through logs
