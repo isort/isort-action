@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A [problem matcher](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md) so you can see issues without trawling through logs
 
+### Changed
+
+- Update plugin to be POSIX-compliant to support usage on MacOS runners
+
 ### Fixed
 
 - Packages are installed into a virtualenv due to the fact that system-wide

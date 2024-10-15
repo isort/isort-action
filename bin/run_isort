@@ -11,7 +11,20 @@ exit_code=$?
 # output to be on a single line, so a (random) delimiter needs to be used
 # so that the output is parsed properly.
 # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-DELIMITER=$(echo $RANDOM | md5sum | head -c 20)
+# POSIX-compliant: see https://stackoverflow.com/a/50435453
+DELIMITER=$(
+    awk '
+    BEGIN {
+        srand();
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        s = "";
+        for(i=0;i<8;i++) {
+            s = s "" substr(chars, int(rand()*62), 1);
+        }
+        print s
+    }
+    '
+)
 {
     echo "isort-output<<${DELIMITER}"
     echo "${isort_result}"
