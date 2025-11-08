@@ -24,6 +24,13 @@ Optional. Paths to python requirements files to install before running isort.
 If multiple requirements files are provided, they should be separated by a space.
 If custom package installation is required, dependencies should be installed in a separate step before using this action.
 
+### `output-file`
+
+Optional. Path to write isort output to a file instead of stdout.
+Useful for keeping GitHub Actions logs clean when using `--diff` or `--check-only`.
+The output file is written relative to the repository root.
+If specified, the isort output will be saved to this file without appearing in the job log.
+
 ## Outputs
 
 ### `isort-result`
@@ -31,6 +38,8 @@ If custom package installation is required, dependencies should be installed in 
 Output of the `isort` CLI.
 
 ## Example usage
+
+### Basic usage
 
 ```yaml
 name: Run isort
@@ -45,6 +54,28 @@ jobs:
       - uses: isort/isort-action@v1
         with:
             requirements-files: "requirements.txt requirements-test.txt"
+```
+
+### With output file (to keep logs clean)
+
+```yaml
+name: Run isort with file output
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: isort/isort-action@v1
+        with:
+            output-file: "isort-output.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+            name: isort-output
+            path: isort-output.txt
 ```
 
 ## Developing

@@ -62,6 +62,13 @@ inputs:
     required: false
     default: ""
 
+  output-file:
+    description: >
+      Optional path to write isort output to a file instead of stdout.
+      Useful for keeping logs clean when using --diff or --check-only.
+    required: false
+    default: ""
+
 outputs:
   isort-result:
     description: isort result
@@ -88,5 +95,7 @@ runs:
         ${{ inputs.configuration }}
         ${{ inputs.sort-paths || inputs.sortPaths }}
       shell: bash
+      env:
+        OUTPUT_FILE: ${{ inputs.output-file }}
     - run: echo "::remove-matcher owner=isort-matcher::"
       shell: bash

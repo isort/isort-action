@@ -7,6 +7,12 @@ echo "Running isort $*"
 isort_result=$(isort "$@" 2>&1)
 exit_code=$?
 
+# If OUTPUT_FILE is specified, write isort output to that file
+if [ -n "${OUTPUT_FILE}" ]; then
+    echo "${isort_result}" > "${OUTPUT_FILE}"
+    echo "isort output written to ${OUTPUT_FILE}"
+fi
+
 # The isort output can be a multiline string. By default, GITHUB_OUTPUT expects
 # output to be on a single line, so a (random) delimiter needs to be used
 # so that the output is parsed properly.

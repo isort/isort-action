@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- New `output-file` input parameter to write isort output to a file instead of stdout
+  - Useful for keeping GitHub Actions logs clean when using `--diff` or `--check-only`
+  - Output file is written relative to repository root
+  - File can be uploaded as an artifact for later analysis
+
 ## [1.1.1] - 2024-10-14
 
 ### Added
