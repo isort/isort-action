@@ -11,7 +11,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: imports-properly-sorted
         uses: ./
         with:
@@ -57,7 +57,7 @@ jobs:
           - spec: latest
             expected: "*"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./
         with:
           isort-version: ${{ matrix.spec }}
@@ -70,7 +70,7 @@ jobs:
   requirements-files:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./
         with:
           requirements-files: >-
