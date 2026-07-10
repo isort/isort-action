@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `isort-version` accepts [version specifiers](https://packaging.python.org/en/latest/specifications/version-specifiers/#id5). A bare version, such as `8.0.0`, continues to pin that version exactly.
+
+### Fixed
+
+- All space-separated `requirements-files` are installed. Previously, every file after the first was silently ignored.
+
 ## [1.1.1] - 2024-10-14
 
 ### Added

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Assert that a package is installed in the action's virtualenv, optionally at
+# a version matching a glob.
+#
+#     assert_installed_version isort '8.*'
+#     assert_installed_version six
+
+set -euo pipefail
+
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "usage: $0 PACKAGE [EXPECTED_VERSION_GLOB]"
+    exit 1
+fi
+
+package=$1
+expected=${2:-*}
+
+# shellcheck source=/dev/null
+source "${HOME}/isort-venv/bin/activate"
+
+if ! installed=$(python3 -c \
+    'import importlib.metadata, sys; print(importlib.metadata.version(sys.argv[1]))' \
+    "$package" 2> /dev/null); then
+    echo "::error::${package} is not installed"
+    exit 1
+fi
+
+echo "${package}: installed ${installed}, expected ${expected}"
+
+# $expected is unquoted so that it is matched as a glob.
+# shellcheck disable=SC2053
+if [[ $installed != $expected ]]; then
+    echo "::error::expected ${package} ${expected}, got ${installed}"
+    exit 1
+fi
