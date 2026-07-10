@@ -75,11 +75,14 @@ runs:
     - run: >
         python -m venv "${HOME}/isort-venv"
       shell: bash
-    - run: >
-        $GITHUB_ACTION_PATH/bin/install_packages
-        ${{ inputs.isort-version || inputs.isortVersion }}
-        ${{ inputs.requirements-files || inputs.requirementsFiles }}
+    - run: $GITHUB_ACTION_PATH/bin/install_packages
       shell: bash
+      env:
+        # Pass inputs as environment variables so that version specifiers containing
+        # shell metacharacters are not interpreted as redirections by bash.
+        ISORT_VERSION: ${{ inputs.isort-version || inputs.isortVersion }}
+        REQUIREMENTS_FILES: >-
+          ${{ inputs.requirements-files || inputs.requirementsFiles }}
     - run: echo "::add-matcher::$GITHUB_ACTION_PATH/isort-matcher.json"
       shell: bash
     - id: run-isort

@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
 
-isort_version=$1
-requirements_files=$2
+isort_version="${ISORT_VERSION:-}"
+requirements_files="${REQUIREMENTS_FILES:-}"
+
+extras="isort[requirements_deprecated_finder,pipfile_deprecated_finder]"
+
+case "$isort_version" in
+    "" | latest)
+        requirement="$extras"
+        ;;
+    [=!~\<\>]*)
+        requirement="${extras}${isort_version}"
+        ;;
+    *)
+        requirement="${extras}==${isort_version}"
+        ;;
+esac
 
 echo "::group::Install isort"
 
 # shellcheck source=/dev/null
 source "${HOME}/isort-venv/bin/activate"
 
-if [ -z "$isort_version" ] || [ "$isort_version" == "latest" ]; then
-    echo "Installing latest version of isort"
-    python3 -m pip install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]"
-else
-    echo "Installing isort==$isort_version"
-    python3 -m pip install "isort[requirements_deprecated_finder,pipfile_deprecated_finder]==$isort_version"
-fi
+echo "Installing $requirement"
+python3 -m pip install "$requirement"
 echo "::endgroup::"
 
 if [ -n "$requirements_files" ]; then
