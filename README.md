@@ -10,6 +10,23 @@ It requires that the [`checkout`][github-checkout] action be used first.
 
 Optional. Version of `isort` to use. Defaults to latest version of `isort`.
 
+A bare version is pinned exactly, so `isort-version: 5.12.0` installs `isort==5.12.0`.
+Alternatively, any value beginning with a [version specifier][version-specifiers]
+is passed to `pip` as written:
+
+```yaml
+- uses: isort/isort-action@v1
+  with:
+    # Upgrade to 8.0.1 or 8.1.0, but not 9.0.0
+    isort-version: "~=8.0"
+```
+
+```yaml
+- uses: isort/isort-action@v1
+  with:
+    isort-version: ">=7,<8"
+```
+
 ### `sort-paths`
 
 Optional. List of paths to sort, relative to your project root. Defaults to `.`
@@ -58,3 +75,4 @@ or add the `--check-only` flag to exit without formatting code.
 
 [contributors-guide]: CONTRIBUTING.md
 [github-checkout]: https://github.com/actions/checkout
+[version-specifiers]: https://packaging.python.org/en/latest/specifications/version-specifiers/#id5

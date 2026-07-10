@@ -11,7 +11,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: imports-properly-sorted
         uses: ./
         with:
@@ -34,3 +34,49 @@ jobs:
           if ! [[ $output == *"${expected_substring}"* ]]; then
             exit 1
           fi
+
+  # Each spec needs its own runner: `python -m venv` does not clear an
+  # existing venv, so a range spec would be satisfied by whatever isort a
+  # previous step already installed.
+  version-resolution:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - spec: 8.0.0
+            expected: 8.0.0
+          - spec: ==8.0.1
+            expected: 8.0.1
+          - spec: "~=8.0"
+            expected: 8.*
+          - spec: ">=8.0.0,<8.0.1"
+            expected: 8.0.0
+          - spec: "!=8.0.1,>=8.0,<9"
+            expected: 8.0.0
+          - spec: latest
+            expected: "*"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./
+        with:
+          isort-version: ${{ matrix.spec }}
+          sort-paths: test/good.py
+      - name: assert-expected-version-installed
+        run: test/assert_installed_version isort "$EXPECTED"
+        env:
+          EXPECTED: ${{ matrix.expected }}
+
+  requirements-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./
+        with:
+          requirements-files: >-
+            test/requirements-a.txt test/requirements-b.txt
+          sort-paths: test/good.py
+      - name: assert-every-requirements-file-installed
+        run: |
+          test/assert_installed_version six
+          test/assert_installed_version iniconfig
